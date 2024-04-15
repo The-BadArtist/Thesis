@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Top 3 Emergency Contacts </title>
+</head>
+
+<body>
+    <h1>Top 3 Emergency Contacts </h1>
+
+    <form onsubmit="addEmergencyContact()">
+        <input type="text" id="emergency-contact-1-name" placeholder="Enter emergency contact 1 name">
+        <input type="tel" id="emergency-contact-1-phone-number" placeholder="Enter emergency contact 1 phone number"> </br>
+
+        <input type="text" id="emergency-contact-2-name" placeholder="Enter emergency contact 2 name">
+        <input type="tel" id="emergency-contact-2-phone-number" placeholder="Enter emergency contact 2 phone number"> </br>
+
+        <input type="text" id="emergency-contact-3-name" placeholder="Enter emergency contact 3 name">
+        <input type="tel" id="emergency-contact-3-phone-number" placeholder="Enter emergency contact 3 phone number">
+
+        <input type="submit" value="Add Emergency Contacts">
+    </form>
+
+    <ul id="emergency-contacts"></ul>
+
+    <script>
+        const emergencyContactsElement = document.getElementById('emergency-contacts');
+
+        function addEmergencyContact() {
+            const emergencyContact1Name = document.getElementById('emergency-contact-1-name').value;
+            const emergencyContact1PhoneNumber = document.getElementById('emergency-contact-1-phone-number').value;
+
+            const emergencyContact2Name = document.getElementById('emergency-contact-2-name').value;
+            const emergencyContact2PhoneNumber = document.getElementById('emergency-contact-2-phone-number').value;
+
+            const emergencyContact3Name = document.getElementById('emergency-contact-3-name').value;
+            const emergencyContact3PhoneNumber = document.getElementById('emergency-contact-3-phone-number').value;
+
+            // Create new emergency contact objects
+            const emergencyContact1 = {
+                name: emergencyContact1Name,
+                phoneNumber: emergencyContact1PhoneNumber,
+            };
+
+            const emergencyContact2 = {
+                name: emergencyContact2Name,
+                phoneNumber: emergencyContact2PhoneNumber,
+            };
+
+            const emergencyContact3 = {
+                name: emergencyContact3Name,
+                phoneNumber: emergencyContact3PhoneNumber,
+            };
+
+            // Add the emergency contacts to the emergency contacts list
+            emergencyContactsElement.appendChild(createEmergencyContactElement(emergencyContact1));
+            emergencyContactsElement.appendChild(createEmergencyContactElement(emergencyContact2));
+            emergencyContactsElement.appendChild(createEmergencyContactElement(emergencyContact3));
+
+            // Clear the emergency contact form
+            document.getElementById('emergency-contact-1-name').value = '';
+            document.getElementById('emergency-contact-1-phone-number').value = '';
+
+            document.getElementById('emergency-contact-2-name').value = '';
+            document.getElementById('emergency-contact-2-phone-number').value = '';
+
+            document.getElementById('emergency-contact-3-name').value = '';
+            document.getElementById('emergency-contact-3-phone-number').value = '';
+        }
+
+        function createEmergencyContactElement(emergencyContact) {
+            const emergencyContactElement = document.createElement('li');
+            emergencyContactElement.textContent = emergencyContact.name;
+
+            return emergencyContactElement;
+        }
+    </script>
+</body>
+
+</html>
