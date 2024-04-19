@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors')
-// const http = require('http'); //? May not need
+const http = require('http'); //? May not need
 require('dotenv').config()
 
 
@@ -29,6 +29,7 @@ const client = mysql.createConnection({
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
+  port: 3306
 });
 
 client.connect(function(err) {
@@ -51,10 +52,15 @@ app.use('/signin', signInRoute);
 
 
 
+const publicPath = path.join(__dirname, 'public');
+const pagesPath = path.join(__dirname, 'pages');
+
+app.use(express.json());
+app.use('/pages', require('./routes/Signup'));
+app.use('/Sign_Up', require('./pages/Sign_Up'));
 
 
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(publicPath));
 
 const middle = express.urlencoded({
     extended: false,
@@ -68,14 +74,11 @@ const middle = express.urlencoded({
 
 
 app.get("/", (req, res) => {
-    res.end()
+    res.render(`${publicPath}/index.html`);
 })
 /**
  * Custom error handling page
  */
-app.get("*", (req, res) => {
-    //do something
-})
 
 app.post("/submit", middle, (req, res) => {
     let removeUnexpected = (formdata) => {

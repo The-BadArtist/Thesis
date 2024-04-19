@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <link rel= "stylesheet" href= "style.css">
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            
+        }
+
+        body{
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        main{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        nav{
+            background-color:black;
+                list-style-type:none;
+                background-color:black;
+                padding: 0px;
+                margin:0px;
+                overflow: hidden;
+                
+            }
+            nav a{
+                color:rgb(219, 31, 31);
+                text-decoration: none;
+                padding: 15px;
+                display: block;
+                text-align: center;
+            }
+            nav a:hover{
+                background-color:rgb(31, 30, 30);
+            
+            }
+            nav li{
+                float: left;
+                
+            }
+
+
+
+    </style>
+    <script>
+        function setFormMessage(formElement, tyoe, message){
+            const messageElement = formElement.querySelector("form__message");
+            messageElement.textContent = message;
+            messageElement.classList.remove("form__message--succss", "form__message--error");
+            messageElement.classList.add('form__message--${type}');
+        }
+
+        document.addEventListener("DOMContentLoaded", () =>{
+            const loginForm = document.querySelector("#login");
+            const createAccountForm = document.querySelector("#createAccount");
+        });
+
+        document.querySelector("#linkCreateAccount").addEventListener("click", e => {
+            e.preventDefault();
+            loginForm.classList.add("form--hidden");
+            createAccountForm.classList.remove("form--hidden");
+        });
+
+        document.querySelector("#linkLogin") .addEventListener("click", e => {
+            e.preventDefault();
+            loginForm.classList.remove("form--hidden");
+            createAccountForm.classList.add("form--hidden");
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /**
+         * Grabbing the HTML Form data and transferring to the backend to be processed in node js
+         */
+
+        const form = document.querySelector('form');
+
+
+        if (form) {
+            form.addEventListener('submit', (e) => {
+            e.preventDefault(); //Prevents HTML From Submitting the Form
+
+                const formData = new FormData(form);
+            
+                const urlEncoded = new URLSearchParams(formData).toString();
+            
+
+                //! Change according to host
+                fetch('http://localhost:3000/submit', {
+                    method: "POST", 
+                    body: urlEncoded,
+                    headers: {
+                        'Content-type': 'application/x-www-form-urlencoded',
+            
+                    }
+                })
+            
+                // window.location.assign('/success'); //Redirects user to the thank you page
+            })
+
+        }
+    </script>
+</head>
+<body>
+    <nav id="menu">
+        <ul>
+            <li><a href="/index.html">Home Page</a></li>
+            <li><a href="Contact.html">Contact Page</a></li>
+            <li><a href="Message.html">SOS Message</a></li>
+            <li><a href="Sign Up.html">Logout</a></li>
+        </ul>
+    </nav>
+<h1> Enter your message</h1>
+<input id="userInput"> <br><br>
+<button onclick="myFunction()"> Submit </button>
+<h1 id="message">  </h1>
+
+<style>
+    body {background-color: rgb(26, 33, 33); text-align: center; color: white;}
+</style>
+
+<script>
+    function myFunction() {
+        let userInput = document.querySelector("#userInput");
+        let message = document.querySelector("#message");
+
+        message.innerHTML = userInput.value;
+
+
+    }
+
+</script>
+
+</body>
+</html>

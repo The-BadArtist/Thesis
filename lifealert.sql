@@ -6,9 +6,9 @@ CREATE TABLE user_info(
     f_name VARCHAR(50) NOT NULL,
     l_name VARCHAR(50) NOT NULL,   
     phone_number VARCHAR(25) NOT NULL UNIQUE,
-    user_password INT, 
-    FOREIGN KEY (user_password) REFERENCES passwords(pass_id)
+    user_password INT 
 );
+    -- FOREIGN KEY (user_password) REFERENCES passwords(pass_id)
 
 
 CREATE TABLE password_table(
@@ -16,7 +16,6 @@ CREATE TABLE password_table(
     passwords VARCHAR(50) NOT NULL,
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES user_info(user_id) 
-
 );
 
 CREATE TABLE sos_messages(
